@@ -1,0 +1,139 @@
+import Image from 'next/image';
+import Link from 'next/link';
+
+export default function Home() {
+  const solutions = [
+    {
+      title: 'Contractor Solutions',
+      description: 'Precision engineering, CAD/3D support, and certified quality for large projects.',
+      href: '/solutions/contractors-architects',
+      image: '/images/contractor.webp',
+    },
+    {
+      title: 'Wholesale & Distribution',
+      description: 'High-capacity manufacturing with competitive tiered pricing for global partners.',
+      href: '/solutions/wholesalers-distributors',
+      image: '/images/wholesale.webp',
+    },
+    {
+      title: 'Retail Partnerships',
+      description: 'Market-ready designs, custom powder coating, and premium retail packaging.',
+      href: '/solutions/oem-odm-customization',
+      image: '/images/retail.webp',
+    },
+    {
+      title: 'E-commerce & Amazon',
+      description: 'FBA-friendly shipping, IP protection, and drop-test certified packaging.',
+      href: '/solutions/e-commerce-amazon-sellers',
+      image: '/images/ecommerce.webp',
+    },
+  ];
+
+  return (
+    <main className="min-h-screen">
+      {/* Hero Section */}
+      <section className="relative h-[80vh] flex items-center justify-center bg-gray-900 text-white">
+        <div className="absolute inset-0 z-0">
+          {/* Placeholder for Hero Image */}
+          <div className="w-full h-full bg-gradient-to-r from-black to-transparent opacity-60"></div>
+        </div>
+        
+        <div className="container mx-auto px-4 z-10 text-center">
+          <h1 className="text-5xl md:text-7xl font-bold mb-6">
+            Premium Garden Metal <br /> Products Manufacturer
+          </h1>
+          <p className="text-xl md:text-2xl mb-10 text-gray-300 max-w-3xl mx-auto">
+            Factory-Direct Solutions for Contractors, Wholesalers, and Global Retailers. 
+            US$100M+ Annual Output.
+          </p>
+          <div className="flex flex-wrap justify-center gap-4">
+            <Link href="/solutions/oem-odm-customization" className="bg-blue-600 hover:bg-blue-700 text-white px-8 py-4 rounded-lg font-semibold transition">
+              OEM/ODM Services
+            </Link>
+            <Link href="#solutions" className="bg-white hover:bg-gray-100 text-gray-900 px-8 py-4 rounded-lg font-semibold transition">
+              View Solutions
+            </Link>
+          </div>
+        </div>
+      </section>
+
+      {/* Factory Strength Section */}
+      <section className="py-20 bg-white">
+        <div className="container mx-auto px-4">
+          <div className="flex flex-col md:flex-row items-center gap-12">
+            <div className="flex-1">
+              <div className="bg-gray-200 w-full h-[400px] rounded-2xl flex items-center justify-center text-gray-400">
+                [Factory Panorama Image]
+              </div>
+            </div>
+            <div className="flex-1">
+              <h2 className="text-3xl font-bold mb-6 text-gray-900">10,150m² Precision Manufacturing Facility</h2>
+              <p className="text-lg text-gray-600 mb-6 leading-relaxed">
+                As a TÜV Rheinland-certified gold supplier, Baiet Metal delivers world-class industrial garden solutions. 
+                Our US$100M+ annual output ensures we can handle your largest projects with ease.
+              </p>
+              <ul className="space-y-4">
+                <li className="flex items-center gap-3">
+                  <span className="w-6 h-6 bg-blue-100 text-blue-600 rounded-full flex items-center justify-center text-sm">✓</span>
+                  <span className="font-medium">Professional 51-100 People Team</span>
+                </li>
+                <li className="flex items-center gap-3">
+                  <span className="w-6 h-6 bg-blue-100 text-blue-600 rounded-full flex items-center justify-center text-sm">✓</span>
+                  <span className="font-medium">CNC Precision Processing</span>
+                </li>
+                <li className="flex items-center gap-3">
+                  <span className="w-6 h-6 bg-blue-100 text-blue-600 rounded-full flex items-center justify-center text-sm">✓</span>
+                  <span className="font-medium">TÜV & CE Certified Quality Control</span>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Solutions Grid */}
+      <section id="solutions" className="py-20 bg-gray-50">
+        <div className="container mx-auto px-4">
+          <div className="text-center mb-16">
+            <h2 className="text-4xl font-bold mb-4 text-gray-900">Tailored Solutions for Your Business</h2>
+            <p className="text-gray-600 max-w-2xl mx-auto">
+              Whether you are an architect planning a new landscape or an Amazon seller looking for your next bestseller, we have the manufacturing expertise to support you.
+            </p>
+          </div>
+          
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+            {solutions.map((item, idx) => (
+              <Link key={idx} href={item.href} className="group bg-white rounded-xl overflow-hidden shadow-sm hover:shadow-xl transition-all duration-300">
+                <div className="h-48 bg-gray-200 relative overflow-hidden">
+                  <div className="absolute inset-0 bg-black opacity-0 group-hover:opacity-10 transition-opacity"></div>
+                  <div className="flex items-center justify-center h-full text-gray-400">
+                    [{item.title}]
+                  </div>
+                </div>
+                <div className="p-6">
+                  <h3 className="text-xl font-bold mb-2 text-gray-900 group-hover:text-blue-600 transition-colors">
+                    {item.title}
+                  </h3>
+                  <p className="text-gray-600 text-sm leading-relaxed">
+                    {item.description}
+                  </p>
+                </div>
+              </Link>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* CTA Section */}
+      <section className="py-20 bg-blue-600 text-white text-center">
+        <div className="container mx-auto px-4">
+          <h2 className="text-3xl md:text-5xl font-bold mb-8">Ready to Scale Your Garden Business?</h2>
+          <p className="text-xl mb-10 opacity-90">Get a factory-direct quote and design consultation today.</p>
+          <Link href="mailto:sunny@liaohemetal.com" className="inline-block bg-white text-blue-600 px-10 py-4 rounded-xl font-bold text-lg hover:bg-gray-100 transition">
+            Contact Us Now
+          </Link>
+        </div>
+      </section>
+    </main>
+  );
+}
