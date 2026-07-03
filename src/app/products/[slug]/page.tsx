@@ -27,6 +27,8 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   };
 }
 
+const baseUrl = 'https://www.baietmetal.com';
+
 export default async function ProductPage({ params }: Props) {
   const { slug } = await params;
   const product = getProduct(slug);
@@ -35,8 +37,44 @@ export default async function ProductPage({ params }: Props) {
     notFound();
   }
 
+  const productUrl = `${baseUrl}/products/${product.slug}`;
+  const productJsonLd = {
+    '@context': 'https://schema.org',
+    '@type': 'Product',
+    name: product.name,
+    description: product.description,
+    image: [`${baseUrl}${product.image}`],
+    brand: {
+      '@type': 'Brand',
+      name: 'Baiet Metal',
+    },
+    manufacturer: {
+      '@type': 'Organization',
+      name: 'Baiet Metal',
+      url: baseUrl,
+      additionalProperty: [
+        {
+          '@type': 'PropertyValue',
+          name: 'Annual Output',
+          value: 'US$100M+',
+        },
+        {
+          '@type': 'PropertyValue',
+          name: 'Manufacturing Facility Area',
+          value: '10,150 sqm',
+        },
+      ],
+    },
+    category: product.keywords[0],
+    url: productUrl,
+  };
+
   return (
     <main className="bg-white">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(productJsonLd) }}
+      />
       <section className="relative overflow-hidden bg-gray-950 text-white">
         <div className="absolute inset-0 opacity-35">
           <Image
