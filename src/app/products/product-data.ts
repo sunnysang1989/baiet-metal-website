@@ -34,7 +34,7 @@ export const products: Product[] = [
     shortName: 'Metal Planter Boxes',
     headline: 'Factory-Direct Metal Planter Boxes for Modern Outdoor Spaces',
     description: 'Premium metal planter boxes for garden retailers, landscape contractors, and OEM/ODM brands that need custom size, color, and finish options.',
-    image: '/images/hero-privacy-screen.avif',
+    image: '/images/planter-boxes-real.avif',
     keywords: ['metal planter boxes wholesale', 'outdoor metal planter manufacturer', 'custom metal planter boxes'],
     bullets: [
       'Powder-coated steel and corten-style finishes for modern patio and commercial landscaping projects.',
@@ -102,7 +102,7 @@ export const products: Product[] = [
     shortName: 'Metal Garden Beds',
     headline: 'Metal Garden Beds Built for Durable Planting and Landscape Supply',
     description: 'Factory-direct metal garden beds for home gardens, landscape projects, and private-label garden product lines.',
-    image: '/images/raised-garden-beds-real.avif',
+    image: '/images/garden-beds-real.avif',
     keywords: ['metal garden bed manufacturer', 'metal garden beds wholesale', 'custom metal garden bed'],
     bullets: [
       'Durable metal panels designed for outdoor planting, soil containment, and long-term garden use.',
@@ -136,7 +136,7 @@ export const products: Product[] = [
     shortName: 'Garden Edging',
     headline: 'Metal Garden Edging for Landscape Contractors and Garden Retailers',
     description: 'Flexible, corrosion-resistant metal garden edging for lawns, flower beds, pathways, and professional landscape borders.',
-    image: '/images/hero-garden-bed.avif',
+    image: '/images/garden-edging-real.avif',
     keywords: ['metal garden edging wholesale', 'corrugated garden edging roll', 'landscape edging supplier'],
     bullets: [
       'Creates clean separation for lawns, paths, flower beds, and commercial landscape projects.',
@@ -153,7 +153,7 @@ export const products: Product[] = [
     shortName: 'Firewood Racks',
     headline: 'Metal Firewood Racks for Outdoor Storage and Garden Decoration',
     description: 'Strong metal firewood racks for patios, gardens, fireplaces, outdoor retail, and seasonal storage programs.',
-    image: '/images/hero-privacy-screen.avif',
+    image: '/images/firewood-racks-real.avif',
     keywords: ['metal firewood rack manufacturer', 'outdoor firewood rack wholesale', 'firewood holder supplier'],
     bullets: [
       'Keeps firewood organized, elevated, and visually integrated with modern garden spaces.',
@@ -170,7 +170,7 @@ export const products: Product[] = [
     shortName: 'Garden Arches/Trellises',
     headline: 'Metal Garden Arches and Trellises for Decorative Outdoor Projects',
     description: 'Decorative metal garden arches and trellises for climbing plants, pathways, wedding gardens, and landscape retail programs.',
-    image: '/images/privacy-screens.avif',
+    image: '/images/garden-arches-trellises-real.avif',
     keywords: ['metal garden arch supplier', 'garden trellis manufacturer', 'metal trellis wholesale'],
     bullets: [
       'Adds vertical structure and decorative appeal to gardens, patios, and landscape paths.',

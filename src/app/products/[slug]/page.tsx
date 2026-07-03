@@ -75,7 +75,7 @@ export default async function ProductPage({ params }: Props) {
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(productJsonLd) }}
       />
-      <section className="relative overflow-hidden bg-gray-950 text-white">
+      <section className="relative min-h-[620px] overflow-hidden bg-gray-950 text-white">
         <div className="absolute inset-0 opacity-35">
           <Image
             src={product.image}
@@ -87,7 +87,7 @@ export default async function ProductPage({ params }: Props) {
           />
         </div>
         <div className="absolute inset-0 bg-gradient-to-r from-gray-950 via-gray-950/85 to-gray-950/35" />
-        <div className="container relative mx-auto px-4 py-20 md:py-28">
+        <div className="container relative mx-auto flex min-h-[620px] flex-col justify-center px-4 py-20 md:py-28">
           <p className="mb-4 text-sm font-semibold uppercase tracking-[0.3em] text-blue-300">{product.shortName}</p>
           <h1 className="max-w-4xl text-4xl font-bold tracking-tight md:text-6xl">{product.headline}</h1>
           <p className="mt-6 max-w-3xl text-lg leading-8 text-gray-300 md:text-xl">{product.description}</p>

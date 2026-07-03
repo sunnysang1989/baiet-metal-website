@@ -25,8 +25,8 @@ export default function ProductsPage() {
       <section className="container mx-auto px-4 py-16 md:py-20">
         <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
           {products.map((product) => (
-            <Link key={product.slug} href={`/products/${product.slug}`} className="group overflow-hidden rounded-3xl bg-white shadow-sm ring-1 ring-gray-100 transition hover:-translate-y-1 hover:shadow-xl">
-              <div className="relative h-64 overflow-hidden bg-gray-200">
+            <Link key={product.slug} href={`/products/${product.slug}`} className="group flex h-full flex-col overflow-hidden rounded-3xl bg-white shadow-sm ring-1 ring-gray-100 transition hover:-translate-y-1 hover:shadow-xl">
+              <div className="relative aspect-[4/3] overflow-hidden bg-gray-200">
                 <Image
                   src={product.image}
                   alt={`${product.name} by Baiet Metal`}
@@ -35,10 +35,10 @@ export default function ProductsPage() {
                   className="object-cover transition duration-500 group-hover:scale-105"
                 />
               </div>
-              <div className="p-7">
+              <div className="flex flex-1 flex-col p-7">
                 <p className="mb-3 text-xs font-bold uppercase tracking-[0.25em] text-blue-600">OEM/ODM available</p>
-                <h2 className="mb-4 text-2xl font-bold text-gray-950 group-hover:text-blue-600">{product.name}</h2>
-                <p className="mb-6 text-sm leading-6 text-gray-600">{product.description}</p>
+                <h2 className="mb-4 min-h-[64px] text-2xl font-bold leading-tight text-gray-950 group-hover:text-blue-600">{product.name}</h2>
+                <p className="mb-6 flex-1 text-sm leading-6 text-gray-600">{product.description}</p>
                 <span className="text-sm font-bold text-gray-950">View product details →</span>
               </div>
             </Link>
