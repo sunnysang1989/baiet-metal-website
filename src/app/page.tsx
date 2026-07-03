@@ -7,36 +7,41 @@ export default function Home() {
       title: 'Contractor Solutions',
       description: 'Precision engineering, CAD/3D support, and certified quality for large projects.',
       href: '/solutions/contractors-architects',
-      image: '/images/contractor.webp',
+      image: '/images/hero-garden-bed.png',
     },
     {
       title: 'Wholesale & Distribution',
       description: 'High-capacity manufacturing with competitive tiered pricing for global partners.',
       href: '/solutions/wholesalers-distributors',
-      image: '/images/wholesale.webp',
+      image: '/images/hero-storage-shed.png',
     },
     {
       title: 'Retail Partnerships',
       description: 'Market-ready designs, custom powder coating, and premium retail packaging.',
       href: '/solutions/oem-odm-customization',
-      image: '/images/retail.webp',
+      image: '/images/hero-privacy-screen.png',
     },
     {
       title: 'E-commerce & Amazon',
       description: 'FBA-friendly shipping, IP protection, and drop-test certified packaging.',
       href: '/solutions/e-commerce-amazon-sellers',
-      image: '/images/ecommerce.webp',
+      image: '/images/hero-garden-bed.png',
     },
   ];
 
   return (
     <main className="min-h-screen">
       {/* Hero Section */}
-      <section className="relative h-[80vh] flex items-center justify-center bg-gray-900 text-white">
-        <div className="absolute inset-0 z-0">
-          {/* Placeholder for Hero Image */}
-          <div className="w-full h-full bg-gradient-to-r from-black to-transparent opacity-60"></div>
-        </div>
+      <section className="relative h-[80vh] flex items-center justify-center bg-gray-900 text-white overflow-hidden">
+        <Image
+          src="/images/hero-garden-bed.png"
+          alt="Modern corten steel raised garden bed and metal garden edging by Baiet Metal"
+          fill
+          priority
+          sizes="100vw"
+          className="object-cover"
+        />
+        <div className="absolute inset-0 z-0 bg-gradient-to-r from-black/80 via-black/50 to-black/20" />
         
         <div className="container mx-auto px-4 z-10 text-center">
           <h1 className="text-5xl md:text-7xl font-bold mb-6">
@@ -47,8 +52,8 @@ export default function Home() {
             US$100M+ Annual Output.
           </p>
           <div className="flex flex-wrap justify-center gap-4">
-            <Link href="/solutions/oem-odm-customization" className="bg-blue-600 hover:bg-blue-700 text-white px-8 py-4 rounded-lg font-semibold transition">
-              OEM/ODM Services
+            <Link href="/contact" className="bg-blue-600 hover:bg-blue-700 text-white px-8 py-4 rounded-lg font-semibold transition">
+              Get a Factory Quote
             </Link>
             <Link href="#solutions" className="bg-white hover:bg-gray-100 text-gray-900 px-8 py-4 rounded-lg font-semibold transition">
               View Solutions
@@ -105,10 +110,14 @@ export default function Home() {
             {solutions.map((item, idx) => (
               <Link key={idx} href={item.href} className="group bg-white rounded-xl overflow-hidden shadow-sm hover:shadow-xl transition-all duration-300">
                 <div className="h-48 bg-gray-200 relative overflow-hidden">
+                  <Image
+                    src={item.image}
+                    alt={`${item.title} for Baiet Metal garden metal products`}
+                    fill
+                    sizes="(min-width: 1024px) 25vw, (min-width: 768px) 50vw, 100vw"
+                    className="object-cover transition-transform duration-500 group-hover:scale-105"
+                  />
                   <div className="absolute inset-0 bg-black opacity-0 group-hover:opacity-10 transition-opacity"></div>
-                  <div className="flex items-center justify-center h-full text-gray-400">
-                    [{item.title}]
-                  </div>
                 </div>
                 <div className="p-6">
                   <h3 className="text-xl font-bold mb-2 text-gray-900 group-hover:text-blue-600 transition-colors">
@@ -129,7 +138,7 @@ export default function Home() {
         <div className="container mx-auto px-4">
           <h2 className="text-3xl md:text-5xl font-bold mb-8">Ready to Scale Your Garden Business?</h2>
           <p className="text-xl mb-10 opacity-90">Get a factory-direct quote and design consultation today.</p>
-          <Link href="mailto:sunny@liaohemetal.com" className="inline-block bg-white text-blue-600 px-10 py-4 rounded-xl font-bold text-lg hover:bg-gray-100 transition">
+          <Link href="/contact" className="inline-block bg-white text-blue-600 px-10 py-4 rounded-xl font-bold text-lg hover:bg-gray-100 transition">
             Contact Us Now
           </Link>
         </div>
