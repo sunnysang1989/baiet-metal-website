@@ -94,11 +94,11 @@ export default function RootLayout({
                 <h4 className="font-bold mb-6">Products</h4>
                 <ul className="space-y-4 text-gray-400">
                   <li><Link href="/products" className="hover:text-white transition">All Products</Link></li>
-                  <li><Link href="/products/planter-boxes" className="hover:text-white transition">Metal Planter Boxes</Link></li>
+                  <li><Link href="/products/privacy-screens" className="hover:text-white transition">Privacy Screens</Link></li>
                   <li><Link href="/products/raised-garden-beds" className="hover:text-white transition">Raised Garden Beds</Link></li>
-                  <li><Link href="/products/storage-sheds" className="hover:text-white transition">Storage Sheds</Link></li>
-                  <li><Link href="/products/garden-beds" className="hover:text-white transition">Metal Garden Beds</Link></li>
-                  <li><Link href="/products/mailboxes" className="hover:text-white transition">Mailboxes</Link></li>
+                  <li><Link href="/products/bin-covers" className="hover:text-white transition">Bin Covers</Link></li>
+                  <li><Link href="/products/garden-edging" className="hover:text-white transition">Garden Edging</Link></li>
+                  <li><Link href="/products/oem-odm" className="hover:text-white transition">OEM/ODM</Link></li>
                 </ul>
               </div>
               <div>
