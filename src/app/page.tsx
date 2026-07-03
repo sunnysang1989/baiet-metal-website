@@ -7,25 +7,25 @@ export default function Home() {
       title: 'Contractor Solutions',
       description: 'Precision engineering, CAD/3D support, and certified quality for large projects.',
       href: '/solutions/contractors-architects',
-      image: '/images/hero-garden-bed.png',
+      image: '/images/hero-garden-bed.avif',
     },
     {
       title: 'Wholesale & Distribution',
       description: 'High-capacity manufacturing with competitive tiered pricing for global partners.',
       href: '/solutions/wholesalers-distributors',
-      image: '/images/hero-storage-shed.png',
+      image: '/images/hero-storage-shed.avif',
     },
     {
       title: 'Retail Partnerships',
       description: 'Market-ready designs, custom powder coating, and premium retail packaging.',
       href: '/solutions/oem-odm-customization',
-      image: '/images/hero-privacy-screen.png',
+      image: '/images/hero-privacy-screen.avif',
     },
     {
       title: 'E-commerce & Amazon',
       description: 'FBA-friendly shipping, IP protection, and drop-test certified packaging.',
       href: '/solutions/e-commerce-amazon-sellers',
-      image: '/images/hero-garden-bed.png',
+      image: '/images/hero-garden-bed.avif',
     },
   ];
 
@@ -34,7 +34,7 @@ export default function Home() {
       {/* Hero Section */}
       <section className="relative h-[80vh] flex items-center justify-center bg-gray-900 text-white overflow-hidden">
         <Image
-          src="/images/hero-garden-bed.png"
+          src="/images/hero-garden-bed.avif"
           alt="Modern corten steel raised garden bed and metal garden edging by Baiet Metal"
           fill
           priority
