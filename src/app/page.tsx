@@ -67,8 +67,17 @@ export default function Home() {
         <div className="container mx-auto px-4">
           <div className="flex flex-col md:flex-row items-center gap-12">
             <div className="flex-1">
-              <div className="bg-gray-200 w-full h-[400px] rounded-2xl flex items-center justify-center text-gray-400">
-                [Factory Panorama Image]
+              <div className="relative h-[400px] w-full overflow-hidden rounded-2xl bg-gray-200 shadow-lg">
+                <Image
+                  src="/images/factory-panorama.avif"
+                  alt="Baiet Metal factory panorama from Alibaba verified supplier profile"
+                  fill
+                  sizes="(min-width: 768px) 50vw, 100vw"
+                  className="object-cover"
+                />
+                <div className="absolute bottom-4 left-4 rounded-full bg-black/60 px-4 py-2 text-xs font-semibold text-white backdrop-blur-sm">
+                  Verified factory panorama
+                </div>
               </div>
             </div>
             <div className="flex-1">
