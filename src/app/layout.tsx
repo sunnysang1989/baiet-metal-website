@@ -49,6 +49,7 @@ export default function RootLayout({
               BAIET <span className="text-blue-600">METAL</span>
             </Link>
             <div className="hidden lg:flex items-center gap-6">
+              <Link href="/products" className="text-sm font-medium text-gray-600 hover:text-blue-600 transition">Products</Link>
               <Link href="/solutions/oem-odm-customization" className="text-sm font-medium text-gray-600 hover:text-blue-600 transition">OEM/ODM</Link>
               <Link href="/solutions/contractors-architects" className="text-sm font-medium text-gray-600 hover:text-blue-600 transition">Contractors</Link>
               <Link href="/solutions/wholesalers-distributors" className="text-sm font-medium text-gray-600 hover:text-blue-600 transition">Wholesale</Link>
@@ -87,6 +88,17 @@ export default function RootLayout({
                   <li><Link href="/solutions/wholesalers-distributors" className="hover:text-white transition">Volume Supply</Link></li>
                   <li><Link href="/solutions/e-commerce-amazon-sellers" className="hover:text-white transition">Retail Fulfillment</Link></li>
                   <li><Link href="/solutions/oem-odm-customization" className="hover:text-white transition">Custom Fabrication</Link></li>
+                </ul>
+              </div>
+              <div>
+                <h4 className="font-bold mb-6">Products</h4>
+                <ul className="space-y-4 text-gray-400">
+                  <li><Link href="/products" className="hover:text-white transition">All Products</Link></li>
+                  <li><Link href="/products/planter-boxes" className="hover:text-white transition">Metal Planter Boxes</Link></li>
+                  <li><Link href="/products/raised-garden-beds" className="hover:text-white transition">Raised Garden Beds</Link></li>
+                  <li><Link href="/products/storage-sheds" className="hover:text-white transition">Storage Sheds</Link></li>
+                  <li><Link href="/products/garden-beds" className="hover:text-white transition">Metal Garden Beds</Link></li>
+                  <li><Link href="/products/mailboxes" className="hover:text-white transition">Mailboxes</Link></li>
                 </ul>
               </div>
               <div>
