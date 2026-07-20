@@ -1,7 +1,7 @@
 import Image from 'next/image';
 import Link from 'next/link';
 import { Metadata } from 'next';
-import { products } from './product-data';
+import { getProducts } from './product-data';
 
 export const metadata: Metadata = {
   title: 'Garden Metal Products Manufacturer | Baiet Metal',
@@ -9,7 +9,8 @@ export const metadata: Metadata = {
   keywords: ['garden metal products manufacturer', 'metal planter boxes wholesale', 'metal garden shed manufacturer', 'metal raised garden beds'],
 };
 
-export default function ProductsPage() {
+export default async function ProductsPage() {
+  const products = await getProducts();
   return (
     <main className="bg-white">
       <section className="bg-gray-950 text-white">

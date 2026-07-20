@@ -1,3 +1,6 @@
+import fs from 'fs/promises';
+import path from 'path';
+
 export type Product = {
   slug: string;
   name: string;
@@ -10,196 +13,32 @@ export type Product = {
   specs: string[];
 };
 
-export const products: Product[] = [
-  {
-    slug: 'privacy-screens',
-    name: 'Decorative Laser-Cut Metal Privacy Screens',
-    shortName: '镂空金属屏风',
-    headline: 'Decorative Laser-Cut Metal Privacy Screens for Modern Garden Projects',
-    description: 'Architectural laser-cut metal privacy screens for patios, fences, garden partitions, and custom outdoor decoration projects.',
-    image: '/images/privacy-screens.avif',
-    keywords: ['laser cut privacy screen supplier', 'decorative metal garden screen', 'metal privacy screens wholesale'],
-    bullets: [
-      'Laser-cut patterns create privacy, shade, and premium visual impact for garden and patio spaces.',
-      'Custom patterns, sizes, colors, frames, and mounting details support landscape and retail projects.',
-      'Suitable for garden fences, balcony partitions, hotel patios, courtyards, and architectural decoration.',
-      'OEM/ODM manufacturing supports private-label retailers, distributors, and landscape contractors.',
-      'Factory-direct production backed by TÜV/CE quality control and scalable metal fabrication capability.',
-    ],
-    specs: ['Material: galvanized steel, corten/weathering steel, aluminum or powder-coated steel options', 'Finish: corten rust, matte black, custom RAL powder coating', 'Customization: pattern, size, thickness, frame, mounting holes, packaging', 'Buyer fit: landscape contractors, wholesalers, architects, garden retailers'],
-  },
-  {
-    slug: 'planter-boxes',
-    name: 'Metal Planter Boxes',
-    shortName: 'Metal Planter Boxes',
-    headline: 'Factory-Direct Metal Planter Boxes for Modern Outdoor Spaces',
-    description: 'Premium metal planter boxes for garden retailers, landscape contractors, and OEM/ODM brands that need custom size, color, and finish options.',
-    image: '/images/planter-boxes-real.avif',
-    keywords: ['metal planter boxes wholesale', 'outdoor metal planter manufacturer', 'custom metal planter boxes'],
-    bullets: [
-      'Powder-coated steel and corten-style finishes for modern patio and commercial landscaping projects.',
-      'Custom sizes, colors, drainage options, and retail-ready packaging available for private-label programs.',
-      'Factory-direct supply backed by US$100M+ annual output and a 10,150m² manufacturing facility.',
-      'OEM/ODM support from drawing review to sample development and bulk production.',
-      'Suitable for garden centers, Amazon sellers, hotel landscapes, and urban outdoor spaces.',
-    ],
-    specs: ['Material: galvanized steel, powder-coated steel, corten/weathering steel options', 'Finish: matte black, corten rust, custom RAL colors, wood-grain effect', 'Customization: size, logo, packaging, drainage, reinforcement', 'Buyer fit: wholesalers, distributors, contractors, e-commerce sellers'],
-  },
-  {
-    slug: 'raised-garden-beds',
-    name: 'Metal Raised Garden Beds',
-    shortName: 'Raised Garden Beds',
-    headline: 'Custom Metal Raised Garden Beds for Wholesale and Retail Programs',
-    description: 'Durable raised garden beds and growing boxes built for long-term outdoor planting, bulk retail supply, and landscaping projects.',
-    image: '/images/raised-garden-beds-real.avif',
-    keywords: ['metal raised garden bed wholesale', 'corten steel raised garden bed', 'raised garden bed manufacturer'],
-    bullets: [
-      'Weather-resistant metal construction for backyard planting, urban gardening, and commercial landscape supply.',
-      'Corten steel, galvanized steel, and powder-coated color options for different retail positions.',
-      'Modular structures support customized sizes, corner design, reinforcement, and packaging.',
-      'Factory-direct OEM/ODM service for private-label garden brands and Amazon sellers.',
-      'Designed for efficient flat-pack shipping and scalable B2B procurement.',
-    ],
-    specs: ['Material: galvanized steel, corten steel, coated steel', 'Finish: natural rust patina, green, dark green, black, custom colors', 'Customization: height, width, panel style, corner structure, box packaging', 'Buyer fit: garden retailers, landscapers, online sellers, distributors'],
-  },
-  {
-    slug: 'mailboxes',
-    name: 'Metal Mailboxes and Post Boxes',
-    shortName: 'Mailboxes',
-    headline: 'Custom Metal Mailboxes and Post Boxes for Outdoor Retail Channels',
-    description: 'Metal mailboxes and post boxes made for weather resistance, private-label retail, and OEM/ODM design requirements.',
-    image: '/images/mailboxes-real.avif',
-    keywords: ['metal mailbox manufacturer', 'custom post box supplier', 'outdoor metal mailbox wholesale'],
-    bullets: [
-      'Outdoor-ready metal mailbox manufacturing with custom color, lock, slot, and mounting options.',
-      'OEM/ODM support for retailer-specific shapes, packaging, logo placement, and finish requirements.',
-      'Precision metal fabrication capability supported by CNC processing and factory quality control.',
-      'Suitable for home improvement retailers, distributors, and private-label outdoor product lines.',
-      'Factory-direct pricing and export-oriented production workflow for repeat B2B orders.',
-    ],
-    specs: ['Material: galvanized steel, powder-coated steel, stainless options by request', 'Finish: black, grey, white, custom RAL colors', 'Customization: lock, wall-mounted/post-mounted style, logo, packaging', 'Buyer fit: home improvement retail, distributors, OEM brands'],
-  },
-  {
-    slug: 'storage-sheds',
-    name: 'Metal Garden Storage Sheds',
-    shortName: 'Storage Sheds',
-    headline: 'Metal Garden Storage Sheds for Wholesale, Retail, and OEM Programs',
-    description: 'Factory-built metal storage sheds for garden tools, outdoor equipment, and retail-ready flat-pack supply.',
-    image: '/images/hero-storage-shed.avif',
-    keywords: ['metal garden shed manufacturer', 'wholesale metal garden shed', 'metal storage shed supplier'],
-    bullets: [
-      'Multiple roof styles and size ranges for compact backyard storage and large garden workshops.',
-      'Flat-pack packaging supports efficient freight, retail display, and e-commerce fulfillment.',
-      'Custom colors, panel styles, door configurations, and packaging available for OEM projects.',
-      'Quality-controlled manufacturing from a TÜV Rheinland-certified supplier profile.',
-      'Strong fit for distributors, garden retailers, Amazon sellers, and contractors.',
-    ],
-    specs: ['Size range: compact 3x2ft style up to larger workshop formats by project', 'Material: coated steel panels and reinforced frame options', 'Customization: roof style, color, door, vents, packaging, instruction manual', 'Buyer fit: wholesalers, retailers, Amazon/FBA sellers, outdoor storage brands'],
-  },
-  {
-    slug: 'garden-beds',
-    name: 'Metal Garden Beds',
-    shortName: 'Metal Garden Beds',
-    headline: 'Metal Garden Beds Built for Durable Planting and Landscape Supply',
-    description: 'Factory-direct metal garden beds for home gardens, landscape projects, and private-label garden product lines.',
-    image: '/images/garden-beds-real.avif',
-    keywords: ['metal garden bed manufacturer', 'metal garden beds wholesale', 'custom metal garden bed'],
-    bullets: [
-      'Durable metal panels designed for outdoor planting, soil containment, and long-term garden use.',
-      'Custom sizes, colors, finishes, and panel profiles support different market positions.',
-      'Corten-style, galvanized, and powder-coated options for modern garden aesthetics.',
-      'OEM/ODM manufacturing supports retailers, distributors, landscapers, and e-commerce sellers.',
-      'Factory-direct supply with scalable production capacity and RFQ-based project support.',
-    ],
-    specs: ['Material: galvanized steel, corten/weathering steel, coated steel', 'Finish: rust patina, green, black, wood-grain, custom powder coating', 'Customization: dimensions, panel profile, corner bracket, packaging, logo', 'Buyer fit: garden centers, wholesalers, landscapers, Amazon sellers'],
-  },
-  {
-    slug: 'bin-covers',
-    name: 'Metal Bin Covers and Trash Can Enclosures',
-    shortName: 'Bin Covers',
-    headline: 'Metal Bin Covers and Trash Can Enclosures for Outdoor Storage',
-    description: 'Weather-resistant metal trash can covers and bin enclosures for gardens, patios, residential communities, and retail programs.',
-    image: '/images/bin-covers.avif',
-    keywords: ['metal bin cover supplier', 'trash can enclosure manufacturer', 'outdoor garbage bin cover wholesale'],
-    bullets: [
-      'Conceals outdoor trash cans while improving garden and property appearance.',
-      'Custom size, door style, ventilation, color, and locking options available for OEM projects.',
-      'Durable coated metal construction supports long-term outdoor use and easy maintenance.',
-      'Suitable for homeowners, property managers, garden retailers, and home improvement channels.',
-      'Factory-direct supply supports private-label retail packaging and bulk procurement.',
-    ],
-    specs: ['Material: galvanized steel, powder-coated steel, optional stainless components', 'Finish: black, grey, green, wood-grain, custom RAL colors', 'Customization: single/double/triple bin layout, doors, locks, vents, packaging', 'Buyer fit: retailers, wholesalers, property projects, outdoor storage brands'],
-  },
-  {
-    slug: 'garden-edging',
-    name: 'Metal Garden Edging',
-    shortName: 'Garden Edging',
-    headline: 'Metal Garden Edging for Landscape Contractors and Garden Retailers',
-    description: 'Flexible, corrosion-resistant metal garden edging for lawns, flower beds, pathways, and professional landscape borders.',
-    image: '/images/garden-edging-real.avif',
-    keywords: ['metal garden edging wholesale', 'corrugated garden edging roll', 'landscape edging supplier'],
-    bullets: [
-      'Creates clean separation for lawns, paths, flower beds, and commercial landscape projects.',
-      'Roll and panel formats can be customized for retail, wholesale, and contractor channels.',
-      'Multiple colors and finishes support modern, rustic, or natural garden styles.',
-      'Weather-resistant coated steel construction supports outdoor durability.',
-      'OEM/ODM packaging and size programs available for bulk buyers.',
-    ],
-    specs: ['Material: galvanized steel, corten/weathering steel, coated steel', 'Finish: green, black, corten rust, wood-grain, custom colors', 'Customization: height, length, roll format, stake accessories, packaging', 'Buyer fit: landscapers, garden centers, distributors, e-commerce sellers'],
-  },
-  {
-    slug: 'firewood-racks',
-    name: 'Metal Firewood Racks',
-    shortName: 'Firewood Racks',
-    headline: 'Metal Firewood Racks for Outdoor Storage and Garden Decoration',
-    description: 'Strong metal firewood racks for patios, gardens, fireplaces, outdoor retail, and seasonal storage programs.',
-    image: '/images/firewood-racks-real.avif',
-    keywords: ['metal firewood rack manufacturer', 'outdoor firewood rack wholesale', 'firewood holder supplier'],
-    bullets: [
-      'Keeps firewood organized, elevated, and visually integrated with modern garden spaces.',
-      'Custom sizes, frames, shapes, and finishes support retail and private-label projects.',
-      'Powder-coated metal structure supports outdoor durability and stable storage.',
-      'Seasonal product opportunity for garden centers, home improvement, and e-commerce sellers.',
-      'Factory-direct OEM/ODM service supports packaging, branding, and bulk supply.',
-    ],
-    specs: ['Material: powder-coated steel, galvanized steel, corten-style options', 'Finish: black, corten rust, custom RAL colors', 'Customization: size, shape, handle/accessory details, packaging, logo', 'Buyer fit: retailers, distributors, Amazon sellers, outdoor living brands'],
-  },
-  {
-    slug: 'garden-arches-trellises',
-    name: 'Metal Garden Arches and Trellises',
-    shortName: 'Garden Arches/Trellises',
-    headline: 'Metal Garden Arches and Trellises for Decorative Outdoor Projects',
-    description: 'Decorative metal garden arches and trellises for climbing plants, pathways, wedding gardens, and landscape retail programs.',
-    image: '/images/garden-arches-trellises-real.avif',
-    keywords: ['metal garden arch supplier', 'garden trellis manufacturer', 'metal trellis wholesale'],
-    bullets: [
-      'Adds vertical structure and decorative appeal to gardens, patios, and landscape paths.',
-      'Supports climbing plants, floral displays, entry features, and retail garden decoration lines.',
-      'Custom size, tube profile, ornament pattern, and finish available for OEM/ODM programs.',
-      'Flat-pack packaging options support export shipping and retail channels.',
-      'Factory-direct metal fabrication enables consistent repeat production.',
-    ],
-    specs: ['Material: steel tube, powder-coated steel, galvanized steel', 'Finish: black, green, bronze, custom RAL colors', 'Customization: arch size, trellis pattern, ground stakes, packaging, logo', 'Buyer fit: garden retailers, wholesalers, landscapers, event decor suppliers'],
-  },
-  {
-    slug: 'oem-odm',
-    name: 'OEM/ODM Garden Metal Products',
-    shortName: 'OEM/ODM',
-    headline: 'OEM/ODM Garden Metal Product Manufacturing for Global Brands',
-    description: 'Custom garden metal product development from drawings and samples to production, packaging, and export-ready delivery.',
-    image: '/images/factory-panorama.avif',
-    keywords: ['OEM garden metal products', 'ODM metal garden products factory', 'custom garden metal fabrication'],
-    bullets: [
-      'Supports custom size, color, finish, packaging, drawings, and private-label requirements.',
-      'Covers metal planters, raised beds, privacy screens, bin covers, sheds, edging, racks, and arches.',
-      'Factory capability includes CNC processing, quality inspection, and export production workflow.',
-      'Ideal for retailers, distributors, Amazon sellers, landscape brands, and project buyers.',
-      'RFQ process helps confirm product category, quantity, country, and custom requirements quickly.',
-    ],
-    specs: ['Service scope: drawing review, sample development, production, packaging, shipment support', 'Customization: material, size, finish, logo, carton, instruction manual', 'Factory strength: US$100M+ annual output, 10,150m² facility, TÜV/CE quality control', 'Buyer fit: brand owners, importers, wholesalers, contractors, e-commerce sellers'],
-  },
-];
+export async function getProducts(): Promise<Product[]> {
+  const productsDir = path.join(process.cwd(), 'content/products');
+  try {
+    const files = await fs.readdir(productsDir);
+    
+    const products = await Promise.all(
+      files
+        .filter(file => file.endsWith('.json'))
+        .map(async file => {
+          const filePath = path.join(productsDir, file);
+          const content = await fs.readFile(filePath, 'utf8');
+          const data = JSON.parse(content);
+          return {
+            slug: file.replace('.json', ''),
+            ...data,
+          } as Product;
+        })
+    );
+    return products;
+  } catch (error) {
+    console.error('Error reading products:', error);
+    return [];
+  }
+}
 
-export function getProduct(slug: string) {
+export async function getProduct(slug: string): Promise<Product | undefined> {
+  const products = await getProducts();
   return products.find((product) => product.slug === slug);
 }
