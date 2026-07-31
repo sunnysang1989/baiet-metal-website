@@ -1,4 +1,5 @@
 import { Metadata } from 'next';
+import RfqForm from './RfqForm';
 
 export const metadata: Metadata = {
   title: 'Contact Baiet Metal | Get a Factory-Direct Quote',
@@ -47,40 +48,7 @@ export default function ContactPage() {
         <div className="grid gap-8 lg:grid-cols-[1fr_0.9fr]">
           <div className="rounded-3xl border border-gray-100 bg-gray-50 p-8 md:p-10">
             <h2 className="mb-6 text-2xl font-bold text-gray-900">RFQ Details</h2>
-            <form action="mailto:sunny@liaohemetal.com" method="post" encType="text/plain" className="grid gap-5">
-              <label className="grid gap-2 text-sm font-semibold text-gray-700">
-                Source
-                <input name="source" placeholder="Google / Alibaba / Referral / Other" className="rounded-xl border border-gray-200 px-4 py-3 font-normal" />
-              </label>
-              <label className="grid gap-2 text-sm font-semibold text-gray-700">
-                Product Category
-                <select name="productCategory" className="rounded-xl border border-gray-200 px-4 py-3 font-normal">
-                  <option>Metal raised garden bed / planter box</option>
-                  <option>Metal garden edging</option>
-                  <option>Metal garden storage shed</option>
-                  <option>Decorative privacy screen</option>
-                  <option>Firewood rack</option>
-                  <option>Custom OEM/ODM project</option>
-                </select>
-              </label>
-              <div className="grid gap-5 md:grid-cols-2">
-                <label className="grid gap-2 text-sm font-semibold text-gray-700">
-                  Quantity
-                  <input name="quantity" placeholder="e.g. 500 pcs" className="rounded-xl border border-gray-200 px-4 py-3 font-normal" />
-                </label>
-                <label className="grid gap-2 text-sm font-semibold text-gray-700">
-                  Country
-                  <input name="country" placeholder="e.g. United States" className="rounded-xl border border-gray-200 px-4 py-3 font-normal" />
-                </label>
-              </div>
-              <label className="grid gap-2 text-sm font-semibold text-gray-700">
-                Custom Requirements
-                <textarea name="customRequirements" rows={5} placeholder="Material, size, color, packaging, drawings, destination port..." className="rounded-xl border border-gray-200 px-4 py-3 font-normal" />
-              </label>
-              <button type="submit" className="rounded-xl bg-blue-600 px-6 py-4 font-bold text-white transition hover:bg-blue-700">
-                Send RFQ by Email
-              </button>
-            </form>
+            <RfqForm />
           </div>
 
           <div className="space-y-6">
