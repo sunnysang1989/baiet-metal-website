@@ -15,6 +15,9 @@
     "tinacms": "latest",
     "gray-matter": "latest"
   },
+  "overrides": {
+    "better-sqlite3": "11.10.0"
+  },
   "devDependencies": {
     "@tinacms/cli": "latest",
     "@tailwindcss/postcss": "^4",

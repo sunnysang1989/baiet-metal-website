@@ -32,6 +32,13 @@ yarn-error.log*
 
 # env files (can opt-in for committing if needed)
 .env*
+!.env.example
+
+# local build/install logs
+*.log
+
+# generated admin (built by tinacms build on CI)
+/public/admin/
 
 # vercel
 .vercel
