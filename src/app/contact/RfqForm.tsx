@@ -1,44 +1,86 @@
 'use client';
 
-import { FormEvent } from 'react';
+import { FormEvent, useState } from 'react';
 
 const RFQ_EMAIL = 'sunny@liaohemetal.com';
+const FORM_ENDPOINT = `https://formsubmit.co/ajax/${RFQ_EMAIL}`;
+
+type Status = 'idle' | 'sending' | 'success' | 'error';
 
 export default function RfqForm() {
-  const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
-    event.preventDefault();
-    const formData = new FormData(event.currentTarget);
+  const [status, setStatus] = useState<Status>('idle');
 
-    const source = String(formData.get('source') || '').trim();
+  const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+    const form = event.currentTarget;
+    const formData = new FormData(form);
+
+    // Honeypot spam check
+    if (String(formData.get('botcheck') || '')) {
+      return;
+    }
+
     const productCategory = String(formData.get('productCategory') || '').trim();
     const quantity = String(formData.get('quantity') || '').trim();
-    const country = String(formData.get('country') || '').trim();
-    const customRequirements = String(formData.get('customRequirements') || '').trim();
 
-    const subject = `RFQ - ${productCategory}${quantity ? ` - ${quantity}` : ''}`;
-    const bodyLines = [
-      'Hi Baiet Metal team,',
-      '',
-      'I would like to request a quotation. Details below:',
-      '',
-      `Source: ${source || '-'}`,
-      `Product Category: ${productCategory || '-'}`,
-      `Quantity: ${quantity || '-'}`,
-      `Country: ${country || '-'}`,
-      '',
-      'Custom Requirements:',
-      customRequirements || '-',
-    ];
-
-    const mailtoUrl = `mailto:${RFQ_EMAIL}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(bodyLines.join('\n'))}`;
-    window.location.href = mailtoUrl;
+    setStatus('sending');
+    try {
+      const response = await fetch(FORM_ENDPOINT, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
+        body: JSON.stringify({
+          _subject: `RFQ - ${productCategory}${quantity ? ` - ${quantity}` : ''}`,
+          _template: 'table',
+          _captcha: 'false',
+          email: String(formData.get('email') || '-'),
+          source: String(formData.get('source') || '-'),
+          product_category: productCategory || '-',
+          quantity: quantity || '-',
+          country: String(formData.get('country') || '-'),
+          custom_requirements: String(formData.get('customRequirements') || '-'),
+        }),
+      });
+      const result = await response.json();
+      if (response.ok && (result.success === 'true' || result.success === true)) {
+        setStatus('success');
+        form.reset();
+      } else {
+        setStatus('error');
+      }
+    } catch {
+      setStatus('error');
+    }
   };
+
+  if (status === 'success') {
+    return (
+      <div className="grid gap-4 rounded-2xl border border-green-200 bg-green-50 p-8 text-center">
+        <span className="mx-auto flex h-12 w-12 items-center justify-center rounded-full bg-green-600 text-2xl font-bold text-white">✓</span>
+        <h3 className="text-xl font-bold text-gray-900">RFQ sent successfully!</h3>
+        <p className="text-sm leading-6 text-gray-600">
+          Thank you for your inquiry. Our team will get back to you within 24 hours. For urgent requests, contact us on WhatsApp: +86 135 6121 0720.
+        </p>
+        <button
+          type="button"
+          onClick={() => setStatus('idle')}
+          className="mx-auto rounded-xl border border-gray-300 px-6 py-3 text-sm font-semibold text-gray-700 transition hover:bg-white"
+        >
+          Send another RFQ
+        </button>
+      </div>
+    );
+  }
 
   return (
     <form onSubmit={handleSubmit} className="grid gap-5">
+      <input type="checkbox" name="botcheck" tabIndex={-1} autoComplete="off" className="hidden" aria-hidden="true" />
       <label className="grid gap-2 text-sm font-semibold text-gray-700">
         Source
         <input name="source" placeholder="Google / Alibaba / Referral / Other" className="rounded-xl border border-gray-200 px-4 py-3 font-normal" />
+      </label>
+      <label className="grid gap-2 text-sm font-semibold text-gray-700">
+        Your Email *
+        <input name="email" type="email" required placeholder="e.g. buyer@company.com" className="rounded-xl border border-gray-200 px-4 py-3 font-normal" />
       </label>
       <label className="grid gap-2 text-sm font-semibold text-gray-700">
         Product Category
@@ -65,9 +107,22 @@ export default function RfqForm() {
         Custom Requirements
         <textarea name="customRequirements" rows={5} placeholder="Material, size, color, packaging, drawings, destination port..." className="rounded-xl border border-gray-200 px-4 py-3 font-normal" />
       </label>
-      <button type="submit" className="rounded-xl bg-blue-600 px-6 py-4 font-bold text-white transition hover:bg-blue-700">
-        Send RFQ by Email
+      <button
+        type="submit"
+        disabled={status === 'sending'}
+        className="rounded-xl bg-blue-600 px-6 py-4 font-bold text-white transition hover:bg-blue-700 disabled:cursor-not-allowed disabled:opacity-60"
+      >
+        {status === 'sending' ? 'Sending...' : 'Send RFQ'}
       </button>
+      {status === 'error' && (
+        <p className="rounded-xl bg-red-50 px-4 py-3 text-sm leading-6 text-red-700">
+          Something went wrong. Please try again, or email us directly at{' '}
+          <a href={`mailto:${RFQ_EMAIL}`} className="font-semibold underline">
+            {RFQ_EMAIL}
+          </a>
+          .
+        </p>
+      )}
     </form>
   );
 }
