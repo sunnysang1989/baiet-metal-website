@@ -3,7 +3,7 @@
 import { FormEvent, useState } from 'react';
 
 const RFQ_EMAIL = 'sunny@liaohemetal.com';
-const FORM_ENDPOINT = `https://formsubmit.co/ajax/${RFQ_EMAIL}`;
+const WEB3FORMS_ACCESS_KEY = '79cac822-5b6b-4fd9-a413-f2c8090f580b';
 
 type Status = 'idle' | 'sending' | 'success' | 'error';
 
@@ -25,13 +25,13 @@ export default function RfqForm() {
 
     setStatus('sending');
     try {
-      const response = await fetch(FORM_ENDPOINT, {
+      const response = await fetch('https://api.web3forms.com/submit', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
         body: JSON.stringify({
-          _subject: `RFQ - ${productCategory}${quantity ? ` - ${quantity}` : ''}`,
-          _template: 'table',
-          _captcha: 'false',
+          access_key: WEB3FORMS_ACCESS_KEY,
+          subject: `RFQ - ${productCategory}${quantity ? ` - ${quantity}` : ''}`,
+          from_name: 'Baiet Metal Website',
           email: String(formData.get('email') || '-'),
           source: String(formData.get('source') || '-'),
           product_category: productCategory || '-',
@@ -41,7 +41,7 @@ export default function RfqForm() {
         }),
       });
       const result = await response.json();
-      if (response.ok && (result.success === 'true' || result.success === true)) {
+      if (response.ok && result.success) {
         setStatus('success');
         form.reset();
       } else {
