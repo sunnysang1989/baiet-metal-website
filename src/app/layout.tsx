@@ -2,6 +2,8 @@ import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import Link from "next/link";
+import Analytics from "./components/Analytics";
+import JsonLd from "./components/JsonLd";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -13,7 +15,48 @@ const geistMono = Geist_Mono({
   subsets: ["latin"],
 });
 
+const baseUrl = "https://www.baietmetal.com";
+const googleSiteVerification = process.env.NEXT_PUBLIC_GOOGLE_SITE_VERIFICATION;
+const bingSiteVerification = process.env.NEXT_PUBLIC_BING_SITE_VERIFICATION;
+
+const organizationJsonLd = {
+  "@context": "https://schema.org",
+  "@type": "Organization",
+  name: "Baiet Metal",
+  legalName: "Shandong Liaohe New Materials Co., Ltd.",
+  url: baseUrl,
+  logo: `${baseUrl}/images/factory-panorama.avif`,
+  description:
+    "Factory-direct manufacturer of garden metal products, including raised garden beds, privacy screens, storage sheds, planter boxes, garden edging, and OEM/ODM metal fabrication.",
+  email: "sunny@liaohemetal.com",
+  telephone: "+86-135-6121-0720",
+  address: {
+    "@type": "PostalAddress",
+    addressLocality: "Liaocheng",
+    addressRegion: "Shandong",
+    addressCountry: "CN",
+  },
+  sameAs: [baseUrl],
+};
+
+const websiteJsonLd = {
+  "@context": "https://schema.org",
+  "@type": "WebSite",
+  name: "Baiet Metal",
+  url: baseUrl,
+  publisher: {
+    "@type": "Organization",
+    name: "Shandong Liaohe New Materials Co., Ltd.",
+  },
+  potentialAction: {
+    "@type": "SearchAction",
+    target: `${baseUrl}/products?search={search_term_string}`,
+    "query-input": "required name=search_term_string",
+  },
+};
+
 export const metadata: Metadata = {
+  metadataBase: new URL(baseUrl),
   title: {
     default: "Baiet Metal | Premium Garden Metal Solutions",
     template: "%s | Baiet Metal",
@@ -21,6 +64,7 @@ export const metadata: Metadata = {
   description: "Global manufacturer of high-quality garden metal products. Expert OEM/ODM solutions for bin covers, post boxes, and garden edging.",
   keywords: ["Garden Metal Products", "Bin Storage", "Landscape Edging", "Manufacturer", "China Supplier"],
   alternates: {
+    canonical: "/",
     languages: {
       'es-ES': '/es',
       'de-DE': '/de',
@@ -28,6 +72,20 @@ export const metadata: Metadata = {
       'it-IT': '/it',
       'id-ID': '/id',
       'vi-VN': '/vi',
+    },
+  },
+  openGraph: {
+    type: "website",
+    url: baseUrl,
+    siteName: "Baiet Metal",
+    title: "Baiet Metal | Premium Garden Metal Solutions",
+    description: "Factory-direct garden metal products and OEM/ODM manufacturing for global B2B buyers.",
+    images: ["/images/factory-panorama.avif"],
+  },
+  verification: {
+    ...(googleSiteVerification ? { google: googleSiteVerification } : {}),
+    other: {
+      ...(bingSiteVerification ? { "msvalidate.01": bingSiteVerification } : {}),
     },
   },
 };
@@ -43,6 +101,8 @@ export default function RootLayout({
       className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}
     >
       <body className="min-h-full flex flex-col">
+        <Analytics />
+        <JsonLd data={[organizationJsonLd, websiteJsonLd]} />
         <header className="fixed top-0 w-full z-50 bg-white/80 backdrop-blur-md border-b border-gray-100">
           <nav className="container mx-auto px-4 h-20 flex items-center justify-between">
             <Link href="/" className="text-2xl font-bold text-gray-900 tracking-tight">

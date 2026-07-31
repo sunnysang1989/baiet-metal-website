@@ -2,6 +2,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { Metadata } from 'next';
 import { notFound } from 'next/navigation';
+import JsonLd from '../../components/JsonLd';
 import { getProduct, getProducts } from '../product-data';
 
 export async function generateStaticParams() {
@@ -39,10 +40,25 @@ export default async function ProductPage({ params }: Props) {
   }
 
   const productUrl = `${baseUrl}/products/${product.slug}`;
+  const faqItems = [
+    {
+      question: `Can Baiet Metal customize ${product.name}?`,
+      answer: `Yes. Baiet Metal supports OEM/ODM customization for ${product.name}, including dimensions, material, finish, color, packaging, and logo requirements.`,
+    },
+    {
+      question: `Who is ${product.name} suitable for?`,
+      answer: `${product.name} is suitable for B2B buyers such as wholesalers, distributors, garden centers, landscapers, contractors, and e-commerce sellers.`,
+    },
+    {
+      question: `How can I request pricing for ${product.name}?`,
+      answer: `Send your quantity, destination country, target size, material, finish, and packaging requirements through the Baiet Metal RFQ form or WhatsApp contact.`,
+    },
+  ];
   const productJsonLd = {
     '@context': 'https://schema.org',
     '@type': 'Product',
     name: product.name,
+    headline: product.headline,
     description: product.description,
     image: [`${baseUrl}${product.image}`],
     brand: {
@@ -51,8 +67,14 @@ export default async function ProductPage({ params }: Props) {
     },
     manufacturer: {
       '@type': 'Organization',
-      name: 'Baiet Metal',
+      name: 'Shandong Liaohe New Materials Co., Ltd.',
       url: baseUrl,
+      address: {
+        '@type': 'PostalAddress',
+        addressLocality: 'Liaocheng',
+        addressRegion: 'Shandong',
+        addressCountry: 'CN',
+      },
       additionalProperty: [
         {
           '@type': 'PropertyValue',
@@ -67,15 +89,52 @@ export default async function ProductPage({ params }: Props) {
       ],
     },
     category: product.keywords[0],
+    keywords: product.keywords.join(', '),
     url: productUrl,
+    offers: {
+      '@type': 'Offer',
+      url: productUrl,
+      priceCurrency: 'USD',
+      availability: 'https://schema.org/InStock',
+      priceSpecification: {
+        '@type': 'PriceSpecification',
+        priceCurrency: 'USD',
+        description: 'Factory-direct RFQ pricing based on size, quantity, finish, packaging, and destination country.',
+      },
+      seller: {
+        '@type': 'Organization',
+        name: 'Shandong Liaohe New Materials Co., Ltd.',
+      },
+    },
+    additionalProperty: [
+      ...product.specs.map((spec) => ({
+        '@type': 'PropertyValue',
+        name: 'Specification',
+        value: spec,
+      })),
+      ...product.bullets.map((bullet) => ({
+        '@type': 'PropertyValue',
+        name: 'Product Advantage',
+        value: bullet,
+      })),
+    ],
+  };
+  const faqJsonLd = {
+    '@context': 'https://schema.org',
+    '@type': 'FAQPage',
+    mainEntity: faqItems.map((item) => ({
+      '@type': 'Question',
+      name: item.question,
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: item.answer,
+      },
+    })),
   };
 
   return (
     <main className="bg-white">
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(productJsonLd) }}
-      />
+      <JsonLd data={[productJsonLd, faqJsonLd]} />
       <section className="relative min-h-[620px] overflow-hidden bg-gray-950 text-white">
         <div className="absolute inset-0 opacity-35">
           <Image
@@ -140,6 +199,21 @@ export default async function ProductPage({ params }: Props) {
             <p className="mb-3 text-4xl font-bold text-blue-600">TÜV / CE</p>
             <h3 className="mb-3 text-xl font-bold text-gray-950">Quality Control</h3>
             <p className="text-sm leading-6 text-gray-600">Verified supplier profile, quality inspection, and OEM/ODM production workflow.</p>
+          </div>
+        </div>
+      </section>
+
+      <section className="container mx-auto px-4 py-16 md:py-20">
+        <div className="mx-auto max-w-4xl">
+          <p className="mb-4 text-sm font-bold uppercase tracking-[0.25em] text-blue-600">Factory FAQ</p>
+          <h2 className="mb-8 text-3xl font-bold text-gray-950">Common Questions About {product.name}</h2>
+          <div className="grid gap-4">
+            {faqItems.map((item) => (
+              <details key={item.question} className="rounded-2xl bg-gray-50 p-6 ring-1 ring-gray-100">
+                <summary className="cursor-pointer text-lg font-bold text-gray-950">{item.question}</summary>
+                <p className="mt-4 text-gray-600">{item.answer}</p>
+              </details>
+            ))}
           </div>
         </div>
       </section>
