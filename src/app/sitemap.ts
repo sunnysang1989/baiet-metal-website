@@ -22,6 +22,7 @@ const staticRoutes: RouteConfig[] = [
   { route: '/solutions/e-commerce-amazon-sellers', changeFrequency: 'monthly', priority: 0.7 },
   { route: '/solutions/oem-odm-customization', changeFrequency: 'monthly', priority: 0.7 },
   { route: '/solutions/wholesalers-distributors', changeFrequency: 'monthly', priority: 0.7 },
+  { route: '/privacy-policy', changeFrequency: 'yearly', priority: 0.3 },
 ];
 
 async function getNewsRoutes(): Promise<Array<RouteConfig & { lastModified?: Date }>> {

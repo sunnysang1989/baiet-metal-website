@@ -1,6 +1,7 @@
 'use client';
 
 import { FormEvent, useState } from 'react';
+import { trackRfqSubmission } from '../lib/gtag';
 
 const RFQ_EMAIL = 'sunny@liaohemetal.com';
 const WEB3FORMS_ACCESS_KEY = '79cac822-5b6b-4fd9-a413-f2c8090f580b';
@@ -22,6 +23,8 @@ export default function RfqForm() {
 
     const productCategory = String(formData.get('productCategory') || '').trim();
     const quantity = String(formData.get('quantity') || '').trim();
+    const country = String(formData.get('country') || '').trim();
+    const source = String(formData.get('source') || '').trim();
 
     setStatus('sending');
     try {
@@ -33,15 +36,17 @@ export default function RfqForm() {
           subject: `RFQ - ${productCategory}${quantity ? ` - ${quantity}` : ''}`,
           from_name: 'Baiet Metal Website',
           email: String(formData.get('email') || '-'),
-          source: String(formData.get('source') || '-'),
+          source: source || '-',
           product_category: productCategory || '-',
           quantity: quantity || '-',
-          country: String(formData.get('country') || '-'),
+          country: country || '-',
           custom_requirements: String(formData.get('customRequirements') || '-'),
         }),
       });
       const result = await response.json();
       if (response.ok && result.success) {
+        // Google Ads / GA4 conversion signal — only on a confirmed successful submission.
+        trackRfqSubmission({ productCategory, country, quantity, source });
         setStatus('success');
         form.reset();
       } else {

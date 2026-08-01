@@ -1,5 +1,6 @@
 import { Metadata } from 'next';
 import RfqForm from './RfqForm';
+import ContactLink from '../components/ContactLink';
 
 export const metadata: Metadata = {
   title: 'Contact Baiet Metal | Get a Factory-Direct Quote',
@@ -10,12 +11,14 @@ export const metadata: Metadata = {
 const contactCards = [
   {
     title: 'Email',
+    channel: 'email' as const,
     value: 'sunny@liaohemetal.com',
     href: 'mailto:sunny@liaohemetal.com?subject=Factory-direct%20garden%20metal%20products%20quote',
     description: 'Send drawings, target quantities, destination market, or customization requirements.',
   },
   {
     title: 'WhatsApp',
+    channel: 'whatsapp' as const,
     value: '+86 135 6121 0720',
     href: 'https://wa.me/8613561210720?text=Hi%20Sunny,%20I%27m%20interested%20in%20Baiet%20Metal%20garden%20metal%20products.%20Please%20send%20me%20a%20factory-direct%20quote.',
     description: 'Fast response for product selection, samples, packaging, and OEM/ODM details.',
@@ -65,11 +68,19 @@ export default function ContactPage() {
             </div>
             <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-1">
               {contactCards.map((card) => (
-                <a key={card.title} href={card.href} target={card.href.startsWith('https://') ? '_blank' : undefined} rel={card.href.startsWith('https://') ? 'noopener noreferrer' : undefined} className="rounded-2xl bg-white p-6 shadow-sm ring-1 ring-gray-100 transition hover:-translate-y-1 hover:shadow-lg">
+                <ContactLink
+                  key={card.title}
+                  channel={card.channel}
+                  location="contact_card"
+                  href={card.href}
+                  target={card.href.startsWith('https://') ? '_blank' : undefined}
+                  rel={card.href.startsWith('https://') ? 'noopener noreferrer' : undefined}
+                  className="rounded-2xl bg-white p-6 shadow-sm ring-1 ring-gray-100 transition hover:-translate-y-1 hover:shadow-lg"
+                >
                   <p className="mb-3 text-sm font-semibold uppercase tracking-[0.2em] text-blue-600">{card.title}</p>
                   <p className="mb-4 text-xl font-bold text-gray-950">{card.value}</p>
                   <p className="text-sm leading-6 text-gray-600">{card.description}</p>
-                </a>
+                </ContactLink>
               ))}
             </div>
           </div>
